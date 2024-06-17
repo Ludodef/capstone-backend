@@ -1,0 +1,18 @@
+creazione di uno shop in cui si vende libri,manga e gadget
+
+Sezione libri:
+- Libro (id,titolo,autore,casa editrice,genere,prezzo,trama,saga)
+- Autore(id,nome,cognome)
+- Casa Editrice(id,nome,indirizzo,citta',cap)
+- Genere(id,descrizione)
+- Saga(id,nome,volumi)
+
+Sezione manga:
+- Manga (id,titolo,autore,casa editrice,prezzo,trama,saga)
+- Autore(id,nome,cognome)
+- Casa Editrice(id,nome,indirizzo,citta',cap)
+- Genere(id,descrizione)
+- Saga(id,nome,volumi)
+
+Sezione Gadget:
+-Articolo (id,nome,descrizione,prezzo)
