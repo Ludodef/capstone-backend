@@ -15,4 +15,5 @@ Sezione manga:
 - Saga(id,nome,volumi)
 
 Sezione Gadget:
--Articolo (id,nome,descrizione,prezzo)
+-Articolo (id,nome,descrizione,prezzo,categoria)
+-Categoria(id,descrizione)
