@@ -10,48 +10,48 @@ import java.util.List;
 @Service
 public class AutoreService {
     @Autowired
-    private AutoreRepository autoreRepository;
+    private AutoreRepository repository;
 
     public List<Autore> findAll(){
-        return autoreRepository.findAll();
+        return repository.findAll();
     }
 
-    public AutoreResponse findbyId(Long id){
-        if(!autoreRepository.existsById(id)){
+    public Response findbyId(Long id){
+        if(!repository.existsById(id)){
             throw new EntityNotFoundException("Autore non trovato");
         }
-        Autore autore = autoreRepository.findById(id).get();
-        AutoreResponse autoreResponse = new AutoreResponse();
-        BeanUtils.copyProperties(autore,autoreResponse);
-        return autoreResponse;
+        Autore entity = repository.findById(id).get();
+        Response response = new Response();
+        BeanUtils.copyProperties(entity, response);
+        return response;
     }
 
-    public AutoreResponse create(AutoreRequest autoreRequest){
-        Autore autore = new Autore();
-        BeanUtils.copyProperties(autoreRequest,autore);
-        AutoreResponse autoreResponse = new AutoreResponse();
-        BeanUtils.copyProperties(autore,autoreResponse);
-        autoreRepository.save(autore);
-        return autoreResponse;
+    public Response create(Request request){
+        Autore entity = new Autore();
+        BeanUtils.copyProperties(request,entity);
+        Response response = new Response();
+        BeanUtils.copyProperties(entity, response);
+        repository.save(entity);
+        return response;
     }
 
-    public AutoreResponse modify(Long id, AutoreRequest autoreRequest){
-        if(!autoreRepository.existsById(id)){
+    public Response modify(Long id, Request request){
+        if(!repository.existsById(id)){
             throw new EntityNotFoundException("Autore non trovato");
         }
-        Autore autore = autoreRepository.findById(id).get();
-        BeanUtils.copyProperties(autoreRequest,autore);
-        autoreRepository.save(autore);
-        AutoreResponse autoreResponse = new AutoreResponse();
-        BeanUtils.copyProperties(autore,autoreResponse);
-        return autoreResponse;
+        Autore entity = repository.findById(id).get();
+        BeanUtils.copyProperties(request,entity);
+        repository.save(entity);
+        Response response = new Response();
+        BeanUtils.copyProperties(entity, response);
+        return response;
     }
 
     public String delete(Long id){
-        if(!autoreRepository.existsById(id)){
+        if(!repository.existsById(id)){
             throw new EntityNotFoundException("Autore non trovato");
         }
-        autoreRepository.deleteById(id);
+        repository.deleteById(id);
         return "Autore eliminato con successo";
     }
 
