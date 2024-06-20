@@ -26,6 +26,7 @@ public class Manga {
 
     private double prezzo;
     private String trama;
+    private String image;
 
 
 }

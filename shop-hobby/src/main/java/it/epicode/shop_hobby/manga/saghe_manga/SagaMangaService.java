@@ -30,7 +30,7 @@ public class SagaMangaService {
         return response;
     }
 
-    public Response create(it.epicode.shop_hobby.manga.autore_manga.Request request){
+    public Response create(Request request){
         SagaManga entity = new SagaManga();
         BeanUtils.copyProperties(request,entity);
         Response response = new Response();

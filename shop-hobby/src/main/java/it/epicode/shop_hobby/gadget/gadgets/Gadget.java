@@ -15,6 +15,7 @@ public class Gadget {
     private String nome;
     private String descrizione;
     private double prezzo;
+    private String image;
     @ManyToOne
     private Categoria categoria;
 

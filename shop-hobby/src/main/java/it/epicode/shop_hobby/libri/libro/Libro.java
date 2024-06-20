@@ -31,6 +31,7 @@ public class Libro {
     private Saga saga;
     private double prezzo;
     private String trama;
+    private String image;
 
 
 }
