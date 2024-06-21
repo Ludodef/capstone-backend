@@ -6,6 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
+
 public class Request {
     private Long id;
     private String titolo;
@@ -18,4 +19,31 @@ public class Request {
     private String image;
 
 
+    public Long getIdAutore() {
+        return idAutore;
+    }
+
+    public void setIdAutore(Long idAutore) {
+        this.idAutore = idAutore;
+    }
+
+    public Long getIdCasaEditrice() {
+        return idCasaEditrice;
+    }
+
+    public void setIdCasaEditrice(Long idCasaEditrice) {
+        this.idCasaEditrice = idCasaEditrice;
+    }
+
+    public Iterable<Long> getIdGenere() {
+        return idGenere;
+    }
+    public void setIdGenere(List<Long> idGenere) {
+        this.idGenere = idGenere;
+    }
+
+    public Long getIdSaga() {
+        return idSaga;
+    }
 }
+

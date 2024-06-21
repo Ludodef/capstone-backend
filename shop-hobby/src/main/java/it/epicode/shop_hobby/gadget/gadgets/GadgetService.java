@@ -1,6 +1,8 @@
 package it.epicode.shop_hobby.gadget.gadgets;
 
 
+import it.epicode.shop_hobby.gadget.categorie.Categoria;
+import it.epicode.shop_hobby.gadget.categorie.CategoriaRepository;
 import it.epicode.shop_hobby.libri.libro.Libro;
 import it.epicode.shop_hobby.libri.libro.LibroRepository;
 
@@ -16,6 +18,8 @@ public class GadgetService {
 
     @Autowired
     private GadgetRepository repository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     public List<Gadget> findAll(){
         return repository.findAll();
@@ -32,8 +36,11 @@ public class GadgetService {
     }
 
     public Response create(Request request){
+
         Gadget entity = new Gadget();
         BeanUtils.copyProperties(request,entity);
+        List<Categoria> categorie = categoriaRepository.findAllById(request.getIdCategoria());
+        entity.setCategoria(categorie);
         Response response = new Response();
         BeanUtils.copyProperties(entity, response);
         repository.save(entity);
@@ -42,10 +49,15 @@ public class GadgetService {
 
     public Response modify(Long id, Request request){
         if(!repository.existsById(id)){
-            throw new EntityNotFoundException("Saga non trovata");
+            throw new EntityNotFoundException("Gadget non trovato");
         }
         Gadget entity = repository.findById(id).get();
+
+        List<Categoria> categorie = categoriaRepository.findAllById(request.getIdCategoria());
+
+
         BeanUtils.copyProperties(request,entity);
+        entity.setCategoria(categorie);
         repository.save(entity);
         Response response = new Response();
         BeanUtils.copyProperties(entity, response);

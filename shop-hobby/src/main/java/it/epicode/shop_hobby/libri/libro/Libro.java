@@ -34,4 +34,39 @@ public class Libro {
     private String image;
 
 
+    public void setAutore(Autore autore) {
+        this.autore = autore;
+    }
+
+    public void setCasaEditrice(CasaEditrice casaEditrice) {
+        this.casaEditrice = casaEditrice;
+    }
+
+    public void setGenere(List<Genere> genere) {
+        this.generi = genere;
+    }
+
+    public void setSaga(Saga saga) {
+        this.saga = saga;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public CasaEditrice getCasaEditrice() {
+        return casaEditrice;
+    }
+
+    public Autore getAutore() {
+        return autore;
+    }
+
+    public List<Genere> getGeneri() {
+        return generi;
+    }
+
+    public Saga getSaga() {
+        return saga;
+    }
 }

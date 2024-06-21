@@ -4,6 +4,8 @@ import it.epicode.shop_hobby.gadget.categorie.Categoria;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "gadgets")
 @Data
@@ -17,7 +19,13 @@ public class Gadget {
     private double prezzo;
     private String image;
     @ManyToOne
-    private Categoria categoria;
+    private List<Categoria> categorie;
+
+
+    public void setCategoria(List<Categoria> categoria) {
+        this.categorie = categoria;
+    }
+
 
 
 }

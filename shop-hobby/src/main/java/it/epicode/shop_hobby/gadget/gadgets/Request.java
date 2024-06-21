@@ -14,4 +14,12 @@ public class Request {
     private double prezzo;
     private String image;
     private List<Long> idCategoria;
+
+    public Iterable<Long> getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(List<Long> idCategoria) {
+        this.idCategoria = idCategoria;
+    }
 }
