@@ -1,7 +1,11 @@
 package it.epicode.shop_hobby.manga.genere_manga;
 
+import it.epicode.shop_hobby.manga.manga.Manga;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Table(name = "generi_manga")
@@ -13,4 +17,8 @@ public class GenereManga {
 
     @Column(length = 50,unique = true)
     private String descrizione;
+
+    @ManyToMany
+    @ToString.Exclude
+    private List<Manga> manga;
 }

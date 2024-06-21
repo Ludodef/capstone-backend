@@ -1,8 +1,10 @@
 package it.epicode.shop_hobby.gadget.gadgets;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import it.epicode.shop_hobby.gadget.categorie.Categoria;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -18,13 +20,13 @@ public class Gadget {
     private String descrizione;
     private double prezzo;
     private String image;
-    @ManyToOne
+
+    @ManyToMany
+    @JsonIgnoreProperties("gadgets")
+    @ToString.Exclude
     private List<Categoria> categorie;
 
 
-    public void setCategoria(List<Categoria> categoria) {
-        this.categorie = categoria;
-    }
 
 
 

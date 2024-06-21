@@ -1,7 +1,11 @@
 package it.epicode.shop_hobby.libri.casa_editrice;
 
+import it.epicode.shop_hobby.libri.libro.Libro;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -17,4 +21,8 @@ public class CasaEditrice {
     private String citta;
     @Column(length = 5)
     private String cap;
+
+    @OneToMany(mappedBy ="casaEditrice" )
+    @ToString.Exclude
+    private List<Libro> libro;
 }

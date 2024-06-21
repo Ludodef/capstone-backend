@@ -1,7 +1,11 @@
 package it.epicode.shop_hobby.manga.casa_editrice_manga;
 
+import it.epicode.shop_hobby.manga.manga.Manga;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -16,4 +20,8 @@ public class CasaEditriceManga {
     private String citta;
     @Column(length = 5)
     private String cap;
+
+    @OneToMany(mappedBy = "casaEditriceManga")
+    @ToString.Exclude
+    private List<Manga> manga;
 }

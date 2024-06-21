@@ -1,7 +1,11 @@
 package it.epicode.shop_hobby.libri.genere;
 
+import it.epicode.shop_hobby.libri.libro.Libro;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Table(name = "generi")
@@ -13,4 +17,8 @@ public class Genere {
 
     @Column(length = 50,unique = true)
     private String descrizione;
+
+    @ManyToMany(mappedBy = "generi")
+    @ToString.Exclude
+    private List<Libro> libro;
 }

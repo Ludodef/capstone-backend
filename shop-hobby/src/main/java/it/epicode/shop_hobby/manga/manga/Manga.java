@@ -1,11 +1,13 @@
 package it.epicode.shop_hobby.manga.manga;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import it.epicode.shop_hobby.manga.autore_manga.AutoreManga;
 import it.epicode.shop_hobby.manga.casa_editrice_manga.CasaEditriceManga;
 import it.epicode.shop_hobby.manga.genere_manga.GenereManga;
 import it.epicode.shop_hobby.manga.saghe_manga.SagaManga;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -17,50 +19,32 @@ public class Manga {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String titolo;
+    private String titoloManga;
+
     @ManyToOne
-    private AutoreManga autore;
+    @JsonIgnoreProperties({"manga", "id"})
+    @ToString.Exclude
+    private AutoreManga autoreManga;
+
     @ManyToOne
-    private CasaEditriceManga casaEditrice;
+    @JsonIgnoreProperties({"manga", "id"})
+    @ToString.Exclude
+    private CasaEditriceManga casaEditriceManga;
+
+    @ManyToOne
+    @JsonIgnoreProperties({"manga", "id"})
+    @ToString.Exclude
+    private SagaManga sagaManga;
+
     @ManyToMany
-    private SagaManga saga;
-    @ManyToMany
-    private List<GenereManga> genere;
+    @JsonIgnoreProperties({"manga", "id"})
+    @ToString.Exclude
+    private List<GenereManga> genereManga;
 
-    private double prezzo;
-    private String trama;
-    private String image;
+    private double prezzoManga;
+    private String tramaManga;
+    private String imageManga;
 
 
-    public void setAutore(AutoreManga autore) {
-        this.autore = autore;
-    }
 
-    public AutoreManga getAutore() {
-        return autore;
-    }
-
-    public void setCasaEditrice(CasaEditriceManga casaEditrice) {
-        this.casaEditrice = casaEditrice;
-    }
-
-    public CasaEditriceManga getCasaEditrice() {
-        return casaEditrice;
-    }
-
-    public void setGenere(List<GenereManga> genere) {
-        this.genere = genere;
-    }
-
-    public List<GenereManga> getGenere() {
-        return genere;
-    }
-
-    public void setSaga(SagaManga saga) {
-        this.saga = saga;
-    }
-
-    public SagaManga getSaga() {
-        return saga;
-    }
 }

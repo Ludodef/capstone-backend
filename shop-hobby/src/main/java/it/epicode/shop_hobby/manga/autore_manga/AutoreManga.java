@@ -1,7 +1,11 @@
 package it.epicode.shop_hobby.manga.autore_manga;
 
+import it.epicode.shop_hobby.manga.manga.Manga;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -15,4 +19,8 @@ public class AutoreManga {
     private String nome;
     @Column(length = 50)
     private String cognome;
+
+    @OneToMany(mappedBy = "autoreManga")
+    @ToString.Exclude
+    private List<Manga> manga;
 }

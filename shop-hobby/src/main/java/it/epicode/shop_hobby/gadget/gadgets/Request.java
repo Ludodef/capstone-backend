@@ -19,7 +19,4 @@ public class Request {
         return idCategoria;
     }
 
-    public void setIdCategoria(List<Long> idCategoria) {
-        this.idCategoria = idCategoria;
-    }
 }

@@ -3,10 +3,10 @@ package it.epicode.shop_hobby.gadget.gadgets;
 
 import it.epicode.shop_hobby.gadget.categorie.Categoria;
 import it.epicode.shop_hobby.gadget.categorie.CategoriaRepository;
-import it.epicode.shop_hobby.libri.libro.Libro;
-import it.epicode.shop_hobby.libri.libro.LibroRepository;
 
+import it.epicode.shop_hobby.manga.manga.Manga;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,25 +14,25 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class GadgetService {
 
-    @Autowired
-    private GadgetRepository repository;
-    @Autowired
-    private CategoriaRepository categoriaRepository;
+    private final  GadgetRepository repository;
+    private final CategoriaRepository categoriaRepository;
 
     public List<Gadget> findAll(){
         return repository.findAll();
     }
 
-    public Response findbyId(Long id){
+    public CompleteResponse findbyId(Long id){
         if(!repository.existsById(id)){
             throw new EntityNotFoundException("Saga non trovata");
         }
         Gadget entity = repository.findById(id).get();
-        Response response = new Response();
-        BeanUtils.copyProperties(entity, response);
-        return response;
+        CompleteResponse completeResponse = new CompleteResponse();
+        BeanUtils.copyProperties(entity, completeResponse);
+        completeResponse.setCategorie(entity.getCategorie());
+        return completeResponse;
     }
 
     public Response create(Request request){
@@ -40,7 +40,7 @@ public class GadgetService {
         Gadget entity = new Gadget();
         BeanUtils.copyProperties(request,entity);
         List<Categoria> categorie = categoriaRepository.findAllById(request.getIdCategoria());
-        entity.setCategoria(categorie);
+        entity.setCategorie(categorie);
         Response response = new Response();
         BeanUtils.copyProperties(entity, response);
         repository.save(entity);
@@ -57,18 +57,22 @@ public class GadgetService {
 
 
         BeanUtils.copyProperties(request,entity);
-        entity.setCategoria(categorie);
+        entity.setCategorie(categorie);
         repository.save(entity);
         Response response = new Response();
         BeanUtils.copyProperties(entity, response);
         return response;
     }
 
+    public Gadget findByNome(String nome){
+        return repository.findByNome(nome);
+    }
+
     public String delete(Long id){
         if(!repository.existsById(id)){
-            throw new EntityNotFoundException("Saga non trovata");
+            throw new EntityNotFoundException("Gadget non trovato");
         }
         repository.deleteById(id);
-        return "Saga eliminata con successo";
+        return "Gadget eliminato con successo";
     }
 }
