@@ -2,6 +2,7 @@ package it.epicode.shop_hobby.libri.libro;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import it.epicode.shop_hobby.commons.Prodotto;
 import it.epicode.shop_hobby.libri.autore.Autore;
 import it.epicode.shop_hobby.libri.casa_editrice.CasaEditrice;
 import it.epicode.shop_hobby.libri.genere.Genere;
@@ -16,7 +17,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "libri")
-public class Libro {
+public class Libro implements Prodotto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -24,7 +25,7 @@ public class Libro {
 
     private String titolo;
 
-    @ManyToOne
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnoreProperties({"libri" , "id"})
     @ToString.Exclude
     private Autore autore;
@@ -50,5 +51,8 @@ public class Libro {
     private String image;
 
 
-
+    @Override
+    public String getDescrizione() {
+        return titolo;
+    }
 }

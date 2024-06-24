@@ -22,7 +22,7 @@ public class Autore {
     @Column(length = 50)
     private String cognome;
 
-    @OneToMany(mappedBy = "autore")
+    @ManyToMany(mappedBy = "autore")
     @ToString.Exclude
     private List<Libro> libro;
 

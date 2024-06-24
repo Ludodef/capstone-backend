@@ -20,7 +20,7 @@ public class AutoreManga {
     @Column(length = 50)
     private String cognome;
 
-    @OneToMany(mappedBy = "autoreManga")
+    @ManyToMany(mappedBy = "autoreManga")
     @ToString.Exclude
     private List<Manga> manga;
 }

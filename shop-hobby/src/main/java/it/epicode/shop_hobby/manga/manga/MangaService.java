@@ -2,6 +2,9 @@ package it.epicode.shop_hobby.manga.manga;
 
 
 
+
+import it.epicode.shop_hobby.libri.libro.Libro;
+import it.epicode.shop_hobby.libri.libro.ModifyBookAndAuthorRequest;
 import it.epicode.shop_hobby.manga.autore_manga.AutoreManga;
 import it.epicode.shop_hobby.manga.autore_manga.AutoreMangaRepository;
 import it.epicode.shop_hobby.manga.casa_editrice_manga.CasaEditriceManga;
@@ -131,5 +134,41 @@ public class MangaService {
         }
         repository.deleteById(id);
         return "Manga eliminato con successo";
+    }
+
+    public Response creaLibriEautori(CreateMangaAndAuthorRequest request){
+        AutoreManga autoreManga = new AutoreManga();
+        BeanUtils.copyProperties(request, autoreManga);
+        Manga entity = new Manga();
+        if(!casaEditriceMangaRepository.existsById(request.getIdCasaEditrice())){
+            throw new EntityNotFoundException("Casa editrice not found");
+        }
+        CasaEditriceManga casaEditriceManga = casaEditriceMangaRepository.findById(request.getIdCasaEditrice()).get();
+        if(!sagaMangaRepository.existsById(request.getIdSaga())){
+            throw new EntityNotFoundException("Saga not found");
+        }
+        SagaManga sagaManga = sagaMangaRepository.findById(request.getIdSaga()).get();
+        BeanUtils.copyProperties(request, entity);
+        entity.setGenereManga(genereMangaRepository.findAllById(request.getIdGenere()));
+        entity.setAutoreManga(autoreManga);
+        entity.setCasaEditriceManga(casaEditriceManga);
+        entity.setSagaManga(sagaManga);
+        repository.save(entity);
+        Response response = new Response();
+        BeanUtils.copyProperties(response, entity);
+        return response;
+    }
+    public Response modifyMangaAndAuthor(Long id, ModifyMangaAndAuthorRequest request){
+        if(!repository.existsById(id)){
+            throw new EntityNotFoundException("Libro not found");
+
+        }
+        Manga entity = repository.findById(id).get();
+        entity.setTitoloManga(request.getTitolo());
+        entity.getAutoreManga().setNome(request.getNomeAutoreManga());
+        repository.save(entity);
+        Response response = new Response();
+        BeanUtils.copyProperties(response, entity);
+        return response;
     }
 }

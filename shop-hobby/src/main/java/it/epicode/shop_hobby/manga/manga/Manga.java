@@ -21,7 +21,7 @@ public class Manga {
 
     private String titoloManga;
 
-    @ManyToOne
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JsonIgnoreProperties({"manga", "id"})
     @ToString.Exclude
     private AutoreManga autoreManga;

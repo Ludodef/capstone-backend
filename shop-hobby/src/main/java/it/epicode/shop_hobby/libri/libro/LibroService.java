@@ -136,4 +136,40 @@ public class LibroService {
         repository.deleteById(id);
         return "Libro eliminato con successo";
     }
+    public Response creaLibriEautori(CreateBookandAuthorRequest request){
+        Autore autore = new Autore();
+        BeanUtils.copyProperties(request, autore);
+        Libro entity = new Libro();
+        if(!casaEditriceRepository.existsById(request.getIdCasaEditrice())){
+            throw new EntityNotFoundException("Casa editrice not found");
+        }
+        CasaEditrice casaEditrice = casaEditriceRepository.findById(request.getIdCasaEditrice()).get();
+        if(!sagaRepository.existsById(request.getIdSaga())){
+            throw new EntityNotFoundException("Saga not found");
+        }
+        Saga saga = sagaRepository.findById(request.getIdSaga()).get();
+        BeanUtils.copyProperties(request, entity);
+        entity.setGeneri(genereRepository.findAllById(request.getIdGenere()));
+        entity.setAutore(autore);
+        entity.setCasaEditrice(casaEditrice);
+        entity.setSaga(saga);
+        repository.save(entity);
+        Response response = new Response();
+        BeanUtils.copyProperties(response, entity);
+        return response;
+    }
+
+    public Response modifyBookAndAuthor(Long id,ModifyBookAndAuthorRequest request){
+        if(!repository.existsById(id)){
+            throw new EntityNotFoundException("Libro not found");
+
+        }
+        Libro entity = repository.findById(id).get();
+        entity.setTitolo(request.getTitolo());
+        entity.getAutore().setNome(request.getNomeAutore());
+        repository.save(entity);
+        Response response = new Response();
+        BeanUtils.copyProperties(response, entity);
+        return response;
+    }
 }

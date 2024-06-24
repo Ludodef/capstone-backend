@@ -1,4 +1,5 @@
 creazione di uno shop in cui si vende libri,manga e gadget
+creazione di un carrello
 
 Sezione libri:
 - Libro (id,titolo,autore,casa editrice,genere,prezzo,trama,saga)
@@ -17,3 +18,9 @@ Sezione manga:
 Sezione Gadget:
 -Articolo (id,nome,descrizione,prezzo,categoria)
 -Categoria(id,descrizione)
+
+
+Carrello:
+-Carrello(User, created, updated)
+-Prodotto nel carrello(idCarrello,idprodotto, quantita',prezzo, prezzo totale, aggiunto)
+-Prodotto( nome,descrizione,prezzo,stock)
