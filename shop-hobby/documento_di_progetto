@@ -22,5 +22,5 @@ Sezione Gadget:
 
 Carrello:
 -Carrello(User, created, updated)
--Prodotto nel carrello(idCarrello,idprodotto, quantita',prezzo, prezzo totale, aggiunto)
--Prodotto( nome,descrizione,prezzo,stock)
+-Prodotto nel carrello(idCarrello,idProdotto, quantita',prezzo, prezzo totale, aggiunto)
+-Prodotto( nome,descrizione,prezzo)

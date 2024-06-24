@@ -40,3 +40,13 @@ saga - manga m
 gadget - categorie m
 categorie - gadget m
  ManyToMany
+
+    Carrello
+
+ Carrello - utente o
+ utente -carrello m
+  OneToMany
+
+carrello - cartItem o
+cartItem - carrello m
+ OneToMany

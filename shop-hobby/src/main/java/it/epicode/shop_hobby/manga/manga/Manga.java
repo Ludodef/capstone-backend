@@ -1,6 +1,7 @@
 package it.epicode.shop_hobby.manga.manga;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import it.epicode.shop_hobby.commons.Prodotto;
 import it.epicode.shop_hobby.manga.autore_manga.AutoreManga;
 import it.epicode.shop_hobby.manga.casa_editrice_manga.CasaEditriceManga;
 import it.epicode.shop_hobby.manga.genere_manga.GenereManga;
@@ -14,14 +15,12 @@ import java.util.List;
 @Entity
 @Table(name = "manga")
 @Data
-public class Manga {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+public class Manga extends Prodotto {
 
-    private String titoloManga;
+    private String titolo;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnoreProperties({"manga", "id"})
     @ToString.Exclude
     private AutoreManga autoreManga;
@@ -41,10 +40,8 @@ public class Manga {
     @ToString.Exclude
     private List<GenereManga> genereManga;
 
-    private double prezzoManga;
-    private String tramaManga;
+
     private String imageManga;
 
-
-
 }
+

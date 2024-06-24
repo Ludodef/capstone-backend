@@ -1,6 +1,5 @@
 package it.epicode.shop_hobby.libri.libro;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import it.epicode.shop_hobby.commons.Prodotto;
 import it.epicode.shop_hobby.libri.autore.Autore;
@@ -11,19 +10,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 
-import java.awt.*;
 import java.util.List;
 
 @Entity
 @Data
 @Table(name = "libri")
-public class Libro implements Prodotto {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+public class Libro extends Prodotto {
 
     private String titolo;
+
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnoreProperties({"libri" , "id"})
@@ -46,13 +41,10 @@ public class Libro implements Prodotto {
     private Saga saga;
 
 
-    private double prezzo;
-    private String trama;
+
+
     private String image;
 
 
-    @Override
-    public String getDescrizione() {
-        return titolo;
-    }
+
 }
