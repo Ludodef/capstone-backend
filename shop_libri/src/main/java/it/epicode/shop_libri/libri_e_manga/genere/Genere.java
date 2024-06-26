@@ -19,7 +19,7 @@ public class Genere {
 
     private String descrizione;
 
-    @OneToMany(mappedBy = "categorie")
+    @OneToMany(mappedBy = "genere")
     @ToString.Exclude
     private List<Cartaceo> cartacei;
 

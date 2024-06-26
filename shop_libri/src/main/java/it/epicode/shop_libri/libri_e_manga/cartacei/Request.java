@@ -14,5 +14,12 @@ public class Request {
     private Long idAutore;
     private Long idCasaEditrice;
     private Long idSaga;
+    private TipoCartaceo tipoCartaceo;
+
+    private double prezzo;
+    private String trama;
+    private String immagine;
+    private String isbn;
+    private int numeroPagine;
 
 }
