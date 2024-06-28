@@ -42,6 +42,7 @@ public class Cartaceo {
     private TipoCartaceo tipoCartaceo;
 
     private double prezzo;
+    @Column(length = 1000)
     private String trama;
     private String immagine;
     private String isbn;

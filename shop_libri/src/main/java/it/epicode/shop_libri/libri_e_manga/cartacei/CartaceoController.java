@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/libri")
+@RequestMapping("/api/libri")
 @RequiredArgsConstructor
 public class CartaceoController {
 
@@ -21,7 +21,7 @@ public class CartaceoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Response> modify(@PathVariable Long id, @Valid @RequestBody Request request) {
         Response response = cartaceoService.modify(id, request);
         return ResponseEntity.ok(response);
@@ -39,7 +39,7 @@ public class CartaceoController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteLibro(@PathVariable Long id) {
         String message = cartaceoService.delete(id);
         return ResponseEntity.ok(message);

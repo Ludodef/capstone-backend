@@ -21,7 +21,7 @@ public class GenereService {
     // GET per ID
     public Response findById(Long id){
         if(!repository.existsById(id)){
-            throw new EntityNotFoundException("Categoria non trovato");
+            throw new EntityNotFoundException("Genere non trovato");
         }
 
         Genere entity = repository.findById(id).get();
@@ -35,6 +35,7 @@ public class GenereService {
 
         Genere entity = new Genere();
         BeanUtils.copyProperties(request, entity);
+        repository.save(entity);
         Response response = new Response();
         BeanUtils.copyProperties(entity, response);
         repository.save(entity);
@@ -46,7 +47,7 @@ public class GenereService {
         // Questo metodo modifica un entity esistente.
         // Prima verifica se l'entity esiste nel database. Se non esiste, viene generata un'eccezione.
         if(!repository.existsById(id)){
-            throw new EntityNotFoundException("Categoria non trovato");
+            throw new EntityNotFoundException("Genere non trovato");
         }
         // Se l'entity esiste, le sue proprietà vengono modificate con quelle presenti nell'oggetto CategoriaRequest.
         Genere entity = repository.findById(id).get();
@@ -61,9 +62,9 @@ public class GenereService {
     //DELETE
     public String delete(Long id){
         if(!repository.existsById(id)){
-            throw  new EntityNotFoundException("Categoria non trovato");
+            throw  new EntityNotFoundException("Genere non trovato");
         }
         repository.deleteById(id);
-        return "Categoria eliminato";
+        return "Genere eliminato";
     }
 }

@@ -1,8 +1,6 @@
 package it.epicode.shop_libri.libri_e_manga.case_editrici;
 
 
-import it.epicode.shop_libri.libri_e_manga.cartacei.CasaEditriceService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,13 +31,13 @@ public class CasaEditriceController {
         return ResponseEntity.ok(service.create(request));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Response> modify(@PathVariable Long id, @RequestBody Request request){
         return ResponseEntity.ok(service.modify(id, request));
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         return ResponseEntity.ok(service.delete(id));
     }

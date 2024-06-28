@@ -1,6 +1,5 @@
 package it.epicode.shop_libri.libri_e_manga.case_editrici;
 
-import it.epicode.shop_libri.libri_e_manga.cartacei.CasaEditriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

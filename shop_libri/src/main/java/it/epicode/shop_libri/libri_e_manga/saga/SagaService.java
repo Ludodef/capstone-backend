@@ -32,10 +32,10 @@ public class SagaService {
 
         Saga entity = new Saga();
         BeanUtils.copyProperties(request, entity);
-
+        repository.save(entity);
         Response response = new Response();
         BeanUtils.copyProperties(entity, response);
-        repository.save(entity);
+
         return response;
     }
 

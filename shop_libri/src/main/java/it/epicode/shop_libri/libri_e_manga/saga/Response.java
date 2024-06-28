@@ -8,6 +8,6 @@ import lombok.Data;
 public class Response {
 
     private Long id;
-    private String name;
+    private String nome;
     private  int numeroVolumi;
 }

@@ -34,13 +34,13 @@ public class AutoreController {
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Response> modify(@PathVariable Long id, @RequestBody Request request){
         return ResponseEntity.ok(service.modify(id, request));
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         return ResponseEntity.ok(service.delete(id));
     }

@@ -39,7 +39,7 @@ public class AutoreService {
     public Response create(@Valid Request request){
         Autore entity = new Autore();
         BeanUtils.copyProperties(request, entity);
-
+        repository.save(entity);
         Response response = new Response();
         BeanUtils.copyProperties(entity, response);
         repository.save(entity);
