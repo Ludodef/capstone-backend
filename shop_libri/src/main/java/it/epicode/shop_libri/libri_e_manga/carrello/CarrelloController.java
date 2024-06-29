@@ -37,10 +37,10 @@ public class CarrelloController {
         }
     }
 
-    @PutMapping("/{carrelloId}/add/{prodottoId}")
-    public ResponseEntity<Carrello> addProdottoToCarrello(@PathVariable Long carrelloId, @PathVariable Long prodottoId, @RequestParam int quantita) {
+    @PutMapping("/{carrelloId}/add/{cartaceoId}")
+    public ResponseEntity<Carrello> addCartaceoToCarrello(@PathVariable Long carrelloId, @PathVariable Long cartaceoId, @RequestParam int quantita) {
         try {
-            Carrello carrello = carrelloService.addProdottoToCarrello(carrelloId, prodottoId, quantita);
+            Carrello carrello = carrelloService.addCartaceoToCarrello(carrelloId, cartaceoId, quantita);
             return new ResponseEntity<>(carrello, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -48,9 +48,9 @@ public class CarrelloController {
     }
 
     @PutMapping("/{carrelloId}/remove/{rigaCarrelloId}")
-    public ResponseEntity<Carrello> removeProdottoFromCarrello(@PathVariable Long carrelloId, @PathVariable Long rigaCarrelloId) {
+    public ResponseEntity<Carrello> removeCartaceoFromCarrello(@PathVariable Long carrelloId, @PathVariable Long rigaCarrelloId) {
         try {
-            Carrello carrello = carrelloService.removeProdottoFromCarrello(carrelloId, rigaCarrelloId);
+            Carrello carrello = carrelloService.removeCartaceoFromCarrello(carrelloId, rigaCarrelloId);
             return new ResponseEntity<>(carrello, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -58,9 +58,9 @@ public class CarrelloController {
     }
 
     @PutMapping("/{carrelloId}/update/{rigaCarrelloId}")
-    public ResponseEntity<Carrello> updateQuantitaProdotto(@PathVariable Long carrelloId, @PathVariable Long rigaCarrelloId, @RequestParam int nuovaQuantita) {
+    public ResponseEntity<Carrello> updateQuantitaCartaceo(@PathVariable Long carrelloId, @PathVariable Long rigaCarrelloId, @RequestParam int nuovaQuantita) {
         try {
-            Carrello carrello = carrelloService.updateQuantitaProdotto(carrelloId, rigaCarrelloId, nuovaQuantita);
+            Carrello carrello = carrelloService.updateQuantitaCartaceo(carrelloId, rigaCarrelloId, nuovaQuantita);
             return new ResponseEntity<>(carrello, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

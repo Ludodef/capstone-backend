@@ -2,6 +2,7 @@ package it.epicode.shop_libri.libri_e_manga.carrello;
 
 import it.epicode.shop_libri.libri_e_manga.cartacei.Cartaceo;
 import it.epicode.shop_libri.libri_e_manga.cartacei.CartaceoRepository;
+import it.epicode.shop_libri.libri_e_manga.email.EmailService;
 import it.epicode.shop_libri.libri_e_manga.security.User;
 import it.epicode.shop_libri.libri_e_manga.security.UserRespository;
 import jakarta.persistence.EntityNotFoundException;
@@ -22,6 +23,7 @@ public class CarrelloService {
     @Autowired
     private UserRespository userRepository;
 
+
     public List<Carrello> getAllCarrelli() {
         return carrelloRepository.findAll();
     }
@@ -37,11 +39,12 @@ public class CarrelloService {
 
         Carrello carrello = new Carrello();
         carrello.setUser(user);
+
         return carrelloRepository.save(carrello);
     }
 
     @Transactional
-    public Carrello addProdottoToCarrello(Long carrelloId, Long cartaceoId, int quantita) {
+    public Carrello addCartaceoToCarrello(Long carrelloId, Long cartaceoId, int quantita) {
         Carrello carrello = carrelloRepository.findById(carrelloId)
                 .orElseThrow(() -> new EntityNotFoundException("Carrello non trovato con ID: " + carrelloId));
 
@@ -55,11 +58,12 @@ public class CarrelloService {
         rigaCarrello.setPrezzo(cartaceo.getPrezzo() * quantita);
 
         carrello.getRigheCarrello().add(rigaCarrello);
+        ;
         return carrelloRepository.save(carrello);
     }
 
     @Transactional
-    public Carrello removeProdottoFromCarrello(Long carrelloId, Long rigaCarrelloId) {
+    public Carrello removeCartaceoFromCarrello(Long carrelloId, Long rigaCarrelloId) {
         Carrello carrello = carrelloRepository.findById(carrelloId)
                 .orElseThrow(() -> new EntityNotFoundException("Carrello non trovato con ID: " + carrelloId));
 
@@ -73,7 +77,7 @@ public class CarrelloService {
     }
 
     @Transactional
-    public Carrello updateQuantitaProdotto(Long carrelloId, Long rigaCarrelloId, int nuovaQuantita) {
+    public Carrello updateQuantitaCartaceo(Long carrelloId, Long rigaCarrelloId, int nuovaQuantita) {
         Carrello carrello = carrelloRepository.findById(carrelloId)
                 .orElseThrow(() -> new EntityNotFoundException("Carrello non trovato con ID: " + carrelloId));
 
@@ -84,6 +88,7 @@ public class CarrelloService {
 
         rigaCarrello.setQuantita(nuovaQuantita);
         rigaCarrello.setPrezzo(rigaCarrello.getCartaceo().getPrezzo() * nuovaQuantita);
+
 
         return carrelloRepository.save(carrello);
     }

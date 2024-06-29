@@ -21,7 +21,7 @@ public class RigaCarrello {
     private Carrello carrello;
 
     @ManyToOne
-    @JoinColumn(name = "prodotto_id")
+    @JoinColumn(name = "cartaceo_id")
     @JsonIgnoreProperties({"righeCarrello"})
     @ToString.Exclude
     private Cartaceo cartaceo;

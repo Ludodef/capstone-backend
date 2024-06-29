@@ -29,7 +29,7 @@ public class User{
     private String email;
     @Column(length = 125, nullable = false)
     private String password;
-    //private String avatar;
+    private String avatar;
     @ManyToMany(fetch = FetchType.EAGER)
     private final List<Roles> roles = new ArrayList<>();
 }
