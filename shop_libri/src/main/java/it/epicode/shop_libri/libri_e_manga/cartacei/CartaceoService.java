@@ -181,9 +181,9 @@ public class CartaceoService {
             cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
             cartaceo.setImmagine(null);
             repository.save(cartaceo);
-            return "Avatar deleted successfully";
+            return "Image deleted successfully";
         } else {
-            return "No avatar found for deletion";
+            return "No image found for deletion";
         }
     }
 

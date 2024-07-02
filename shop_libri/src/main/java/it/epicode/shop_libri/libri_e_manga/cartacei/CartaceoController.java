@@ -72,7 +72,7 @@ public class CartaceoController {
                 repository.save(cartaceo);
                 return ResponseEntity.ok(url);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cartaceo not found");
             }
         } catch (IOException e) {
             e.printStackTrace();
