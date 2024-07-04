@@ -4,6 +4,7 @@ package it.epicode.shop_libri.libri_e_manga.security;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 
+
 import it.epicode.shop_libri.libri_e_manga.email.EmailService;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
@@ -42,6 +43,9 @@ public class UserService {
     @Value("${spring.servlet.multipart.max-file-size}")
     private String maxFileSize;
 
+    public List<User> getAllUser() {
+        return usersRepository.findAll();
+    }
 
     public Optional<LoginResponseDTO> login(String username, String password) {
         try {
