@@ -35,6 +35,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             if (header != null && header.startsWith("Bearer")) {
                 //IL TOKEN ESISTE ED E NELLA FORMA Bearer xxxxxxxxx
                 //PER RECUPERARE LA PARTE XXXX SI ESCLUDE Bearer CON SUBSTRING
+
                 var token = header.substring(7); //QUESTO Ã¨ IL TOKEN ESTRATTO A PARTIRE DAL SETTIMO CARATTERE
                 log.info("Token: {}", token);
 

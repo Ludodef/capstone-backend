@@ -17,5 +17,5 @@ public interface CartaceoRepository extends JpaRepository<Cartaceo , Long> {
     public boolean existsByTitolo(String titolo);
 
 
-    public List<CartaceoResponsePrj> findAllBy();
+    public List<Cartaceo> findAllBy();
 }

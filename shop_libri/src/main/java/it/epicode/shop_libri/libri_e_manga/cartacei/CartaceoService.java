@@ -101,7 +101,7 @@ public class CartaceoService {
         return response;
     }
 
-    public List<CartaceoResponsePrj> findAll(){
+    public List<Cartaceo> findAll(){
         return repository.findAllBy();
     }
 

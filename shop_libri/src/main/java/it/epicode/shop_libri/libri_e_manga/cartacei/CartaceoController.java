@@ -17,6 +17,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/libri")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class CartaceoController {
 
     private final CartaceoService cartaceoService;
@@ -44,8 +45,8 @@ public class CartaceoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CartaceoResponsePrj>> findAllLibri() {
-        List<CartaceoResponsePrj> response = cartaceoService.findAll();
+    public ResponseEntity<List<Cartaceo>> findAllLibri() {
+        List<Cartaceo> response = cartaceoService.findAll();
         return ResponseEntity.ok(response);
     }
 
