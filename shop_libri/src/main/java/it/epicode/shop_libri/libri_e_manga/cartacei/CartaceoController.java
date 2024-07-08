@@ -1,7 +1,6 @@
 package it.epicode.shop_libri.libri_e_manga.cartacei;
 
 import com.cloudinary.Cloudinary;
-import it.epicode.shop_libri.libri_e_manga.security.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,32 +27,29 @@ public class CartaceoController {
 
     @PostMapping
     public ResponseEntity<Response> create(@Valid @RequestBody Request request) {
-        Response response = cartaceoService.create(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+       return  ResponseEntity.ok(cartaceoService.create(request));
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Response> modify(@PathVariable Long id, @Valid @RequestBody Request request) {
-        Response response = cartaceoService.modify(id, request);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(cartaceoService.modify(id, request));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CompleteResponse> findCartaceoById(@PathVariable Long id) {
-        CompleteResponse response = cartaceoService.findById(id);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Response> findCartaceoById(@PathVariable Long id) {
+        return ResponseEntity.ok(cartaceoService.findById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<Cartaceo>> findAllLibri() {
-        List<Cartaceo> response = cartaceoService.findAll();
-        return ResponseEntity.ok(response);
+    public List<Cartaceo> findAllLibri() {
+        return cartaceoService.findAll();
+
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteLibro(@PathVariable Long id) {
-        String message = cartaceoService.delete(id);
-        return ResponseEntity.ok(message);
+
+        return ResponseEntity.ok(cartaceoService.delete(id));
     }
     @PostMapping("/{id}/image")
     public ResponseEntity<String> uploadImage(@PathVariable Long id, @RequestParam("file") MultipartFile file) {

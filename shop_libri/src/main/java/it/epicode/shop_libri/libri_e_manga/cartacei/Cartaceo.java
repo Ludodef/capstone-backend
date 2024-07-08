@@ -1,10 +1,7 @@
 package it.epicode.shop_libri.libri_e_manga.cartacei;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import it.epicode.shop_libri.libri_e_manga.autori.Autore;
-import it.epicode.shop_libri.libri_e_manga.case_editrici.CasaEditrice;
-import it.epicode.shop_libri.libri_e_manga.genere.Genere;
-import it.epicode.shop_libri.libri_e_manga.saga.Saga;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -22,22 +19,13 @@ public class Cartaceo {
 
     private String titolo;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @ToString.Exclude
-    @JsonIgnoreProperties({"cartacei", "id"})
-    private Autore autore;
-    @ManyToMany
-    @ToString.Exclude
-    @JsonIgnoreProperties({"cartacei", "id"})
-    private List<Genere> genere;
-    @ManyToOne
-    @ToString.Exclude
-    @JsonIgnoreProperties({"cartacei", "id"})
-    private CasaEditrice casaEditrice;
-    @ManyToOne
-    @ToString.Exclude
-    @JsonIgnoreProperties({"cartacei", "id"})
-    private Saga saga;
+    private String autore;
+
+    private String genere;
+
+    private String casaEditrice;
+
+    private String saga;
 
     private TipoCartaceo tipoCartaceo;
 

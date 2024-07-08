@@ -10,10 +10,9 @@ import java.util.List;
 public class Request {
 
     private String titolo;
-    private List<Long> idGeneri;
-    private Long idAutore;
-    private Long idCasaEditrice;
-    private Long idSaga;
+    private String generi;
+    private String casaEditrice;
+    private String saga;
     private TipoCartaceo tipoCartaceo;
 
     private double prezzo;

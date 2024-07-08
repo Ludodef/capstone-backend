@@ -22,7 +22,9 @@ public class CartaceoRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         if (cartaceoRepository.count() == 0) {
             List<Request> cartacei = Arrays.asList(
-                    new Request("Il Signore degli anelli", Arrays.asList(1L, 6L),2L,2L, 2L ,TipoCartaceo.LIBRO, 12.80,"La Compagnia dell'Anello si apre nella Contea, un idilliaco paese agricolo dove vivono gli Hobbit,saggi e longevi. La quiete è turbata dall'arrivo dello stregone Gandalf", "...","978-8830105263", 606)
+                    new Request("La Compagnia dell'anello" , "Avventura", "Bompiani","Il signore degli anelli", TipoCartaceo.LIBRO , 12.80, "Primo libro", "..." , "1234567890" , 620),
+                    new Request("Le due torri" , "Avventura", "Bompiani","Il signore degli anelli", TipoCartaceo.LIBRO , 12.80, "Secondo libro", "..." , "123456bnt7890" , 620),
+                    new Request("Il ritorno del re" , "Avventura", "Bompiani","Il signore degli anelli", TipoCartaceo.LIBRO , 12.80, "Terzo libro", "..." , "12345ghhjtg67890" , 620)
             );
             cartacei.forEach(cartaceoService::create);
             System.out.println("--- Libri inseriti ---");
