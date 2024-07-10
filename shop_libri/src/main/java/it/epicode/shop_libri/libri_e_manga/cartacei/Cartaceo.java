@@ -2,6 +2,8 @@ package it.epicode.shop_libri.libri_e_manga.cartacei;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import it.epicode.shop_libri.libri_e_manga.carrello.RigaCarrello;
+import it.epicode.shop_libri.libri_e_manga.security.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -27,7 +29,7 @@ public class Cartaceo {
 
     private String saga;
 
-    private TipoCartaceo tipoCartaceo;
+
 
     private double prezzo;
     @Column(length = 1000)
@@ -36,4 +38,18 @@ public class Cartaceo {
     private String isbn;
     private int numeroPagine;
     private boolean disponibile = true;
+    private int quantita;
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"cartacei", "carrello"})
+    @ToString.Exclude
+    private User user;
+
+    @OneToMany(mappedBy = "cartaceo")
+    @JsonIgnoreProperties({"cartacei", "carrello"})
+    private List<RigaCarrello> righeCarrello;
+
 }

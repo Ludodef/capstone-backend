@@ -24,48 +24,41 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     ApplicationUserDetailsService userDetailsService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
-            //VERIFICA DEL TOKEN
             log.info("Processing AuthTokenFilter");
 
             var header = request.getHeader("Authorization");
 
-            if (header != null && header.startsWith("Bearer")) {
-                //IL TOKEN ESISTE ED E NELLA FORMA Bearer xxxxxxxxx
-                //PER RECUPERARE LA PARTE XXXX SI ESCLUDE Bearer CON SUBSTRING
+            if (header != null && header.startsWith("Bearer ")) {
+                // Verifica che la lunghezza dell'header sia sufficiente
+                if (header.length() > 7) {
+                    var token = header.substring(7); // Estrai il token
+                    log.info("Token: {}", token);
 
-                var token = header.substring(7); //QUESTO Ã¨ IL TOKEN ESTRATTO A PARTIRE DAL SETTIMO CARATTERE
-                log.info("Token: {}", token);
+                    if (!jwt.isTokenValid(token)) {
+                        throw new JwtException("token non valido");
+                    }
 
-                //SI EFFETTUA LA VALIDAZIONE DEL TOKEN (IMPLEMENTARE ANCHE VERIFICA DEI MS)
-                if (!jwt.isTokenValid(token))
-                    throw new JwtException("token non valido");
+                    var username = jwt.getUsernameFromToken(token);
+                    log.info("Username: {}", username);
 
-                //SI ESTRAGGONO DAL TOKEN LE INFORMAZIONI RELATIVE ALLO USERNAME
-                var username = jwt.getUsernameFromToken(token);
-                log.info("Username: {}", username);
-                //SI ESTRAE L'UTENTE DAL SUO USERNAME
-                var details = userDetailsService.loadUserByUsername(username);
-                log.info("Details: {}", details);
+                    var details = userDetailsService.loadUserByUsername(username);
+                    log.info("Details: {}", details);
 
-                //SI GENERA IL CONTESTO CONTENENTE I DATI DELL'UTENTE RECUPERATI DAL TOKEN IN MODO DA RENDERLI
-                //DISPONIBILI SE NECESSARI ALL'INTERNO DI UN CONTROLLER
-                var auth = new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());//VERIFICA LA CORRETTEZZA DELLE CREDENZIALI
-                //SI COMPLETA L'OGGETTO AUTH
-                auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                //SI PASSA AL CONTESTO L'OGGETTO AUTH PER RENDERLO SEMPRE DISPONIBILE
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                    var auth = new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());
+                    auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                } else {
+                    log.error("Authorization header too short to contain token");
+                }
+            } else {
+                log.info("No Token or invalid header format");
             }
-            else {
-                System.out.println("---------------- No Token");
-            }
-
         } catch (Exception e) {
             log.error("Exception in auth filter", e);
         }
-        //CHIAMA A CASCATA TUTTI I FILTRI CREATI
+
         filterChain.doFilter(request, response);
     }
 

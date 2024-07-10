@@ -1,6 +1,7 @@
 package it.epicode.shop_libri.libri_e_manga.cartacei;
 
 import com.cloudinary.Cloudinary;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -84,6 +86,26 @@ public class CartaceoController {
             return ResponseEntity.ok(cartaceo.get().getImmagine());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Avatar not found");
+        }
+    }
+
+    @PutMapping("/{id}/quantity")
+    public ResponseEntity<Response> updateProductQuantity(@PathVariable Long id, @RequestBody Map<String, Integer> quantityMap) {
+        Integer newQuantity = quantityMap.get("quantity");
+        if (newQuantity == null) {
+            throw new IllegalArgumentException("Quantity must not be null");
+        }
+        Response updatedProdotto = cartaceoService.updateProductQuantity(id, newQuantity);
+        return ResponseEntity.ok(updatedProdotto);
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Response> updateProdotto(@PathVariable Long id, @RequestBody Request request) {
+        try {
+            return ResponseEntity.ok(cartaceoService.modify(id, request));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
         }
     }
 

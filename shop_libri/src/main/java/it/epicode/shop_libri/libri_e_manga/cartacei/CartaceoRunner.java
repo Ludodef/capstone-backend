@@ -22,9 +22,9 @@ public class CartaceoRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         if (cartaceoRepository.count() == 0) {
             List<Request> cartacei = Arrays.asList(
-                    new Request("La Compagnia dell'anello" , "Avventura", "Bompiani","Il signore degli anelli", TipoCartaceo.LIBRO , 12.80, "Primo libro", "..." , "1234567890" , 620),
-                    new Request("Le due torri" , "Avventura", "Bompiani","Il signore degli anelli", TipoCartaceo.LIBRO , 12.80, "Secondo libro", "..." , "123456bnt7890" , 620),
-                    new Request("Il ritorno del re" , "Avventura", "Bompiani","Il signore degli anelli", TipoCartaceo.LIBRO , 12.80, "Terzo libro", "..." , "12345ghhjtg67890" , 620)
+                   new Request("La compagnia dell'anello", "Avventura/fantasy","J.R.R Tolkien", "Bompiani", "Il signore degli anelli",12.80, "Primo libro","https://res.cloudinary.com/dfm9lzhxy/image/upload/v1719679457/2_avatar.jpg\n","1234567890",600,4L, 100),
+                    new Request("Le due torri", "Avventura/fantasy","J.R.R Tolkien", "Bompiani", "Il signore degli anelli",12.80, "Secondo libro","https://res.cloudinary.com/dfm9lzhxy/image/upload/v1719679457/2_avatar.jpg\n","123456789000",600,4L, 100),
+                    new Request("Il ritorno del re", "Avventura/fantasy","J.R.R Tolkien", "Bompiani", "Il signore degli anelli",12.80, "terzo libro","https://res.cloudinary.com/dfm9lzhxy/image/upload/v1719679457/2_avatar.jpg\n","1234567890",600,4L, 100)
             );
             cartacei.forEach(cartaceoService::create);
             System.out.println("--- Libri inseriti ---");

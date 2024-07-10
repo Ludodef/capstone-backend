@@ -10,5 +10,5 @@ import java.util.List;
 public class Response {
     private Long id;
     private User user;
-    private List<Cartaceo> catacei;
+    private List<Cartaceo> cartacei;
 }

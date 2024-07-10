@@ -10,15 +10,18 @@ import java.util.List;
 public class Request {
 
     private String titolo;
-    private String generi;
+    private String genere;
+    private String autore;
     private String casaEditrice;
     private String saga;
-    private TipoCartaceo tipoCartaceo;
+
 
     private double prezzo;
     private String trama;
     private String immagine;
     private String isbn;
     private int numeroPagine;
+    private Long idUser;
+    private int quantita;
 
 }
