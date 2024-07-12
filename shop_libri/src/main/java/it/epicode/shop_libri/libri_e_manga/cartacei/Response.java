@@ -3,6 +3,8 @@ package it.epicode.shop_libri.libri_e_manga.cartacei;
 import it.epicode.shop_libri.libri_e_manga.security.User;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Response {
     private Long id;
@@ -15,13 +17,12 @@ public class Response {
 
     private double prezzo;
     private String trama;
-    private String immagine;
+    private List<String> immagine;
     private String isbn;
     private int numeroPagine;
-    private boolean disponibile;
     private int quantita;
-    private Long idUser;
-    private User user;
+
+
 
 
 

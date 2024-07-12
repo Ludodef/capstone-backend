@@ -1,25 +1,25 @@
 package it.epicode.shop_libri.libri_e_manga.cartacei;
 
-import lombok.AllArgsConstructor;
+import it.epicode.shop_libri.libri_e_manga.security.User;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
-
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Request {
-
+public class CompleteResponse {
+    private Long id;
     private String titolo;
     private String genere;
     private String autore;
     private String casaEditrice;
     private String saga;
+
+
     private double prezzo;
     private String trama;
+    private List<String> immagine;
     private String isbn;
     private int numeroPagine;
     private int quantita;
-
+    private Long idUser;
+    private User user;
 }
