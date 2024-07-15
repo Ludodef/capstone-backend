@@ -59,13 +59,13 @@ public class ApplicationSecurityConfig {
                 .authorizeHttpRequests(authorize ->
                                 authorize //CONFIGURAZIONE DELLA PROTEZIONE DEI VARI ENDPOINT
                                         .requestMatchers("/users/login").permitAll()
-                                        .requestMatchers("/users/registerAdmin").permitAll() // DA CANCELLARE DOPO AVER CREATO L'ADMIN
-                                        .requestMatchers(HttpMethod.POST, "/users").permitAll() //ENDPOINT DI REGISTRAZIONE APERTO A TUTTI
-                                        .requestMatchers(HttpMethod.GET, "/**").authenticated() //TUTTE GLI ENDPOINTS DI TIPO GET SONO RICHIAMABILI SOLO SE L'UTENTE E AUTENTICATO
-                                        .requestMatchers(HttpMethod.POST, "/**").hasAuthority("ADMIN") //TUTTE LE POST POSSONO ESSERE FATTE SOLO DALL'ADMIN
-                                        .requestMatchers(HttpMethod.PATCH, "/users/{id}").authenticated() //SOLO UN UTENTE AUTENTICATO PUO MODIFICARE I SUOI DATI
-                                        .requestMatchers(HttpMethod.PUT, "/**").hasAuthority("ADMIN") //TUTTE LE PUT POSSONO ESSERE FATTE SOLO DALL'ADMIN
-                                        .requestMatchers(HttpMethod.DELETE, "/**").hasAuthority("ADMIN") //TUTTE LE DELETE POSSONO ESSERE FATTE SOLO DALL'ADMIN
+                                        .requestMatchers("/users/registerAdmin").permitAll()
+                                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                                        .requestMatchers(HttpMethod.GET, "/api/libri/**").authenticated()
+                                        .requestMatchers(HttpMethod.POST, "/api/libri/**").hasAuthority("ADMIN")
+                                        .requestMatchers(HttpMethod.PATCH, "/users/{id}").authenticated()
+                                        .requestMatchers(HttpMethod.PUT, "/**").hasAuthority("ADMIN")
+                                        .requestMatchers(HttpMethod.DELETE, "/**").hasAuthority("ADMIN")
                         //.requestMatchers("/**").authenticated() //TUTTO CIO CHE PUO ESSERE SFUGGITO RICHIEDE L'AUTENTICAZIONE (SERVE A GESTIRE EVENTUALI DIMENTICANZE)
                 )
                 .httpBasic(Customizer.withDefaults())

@@ -24,7 +24,6 @@ import java.util.Map;
 public class CartaceoController {
 
 
-
     @Autowired
     private CartaceoService cartaceoService;
     @Autowired
@@ -33,10 +32,10 @@ public class CartaceoController {
     private Cloudinary cloudinary;
 
     //POST
-    @PostMapping(value = "create", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PostMapping(value = "create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<Response> create(
             @RequestPart("libri") @Valid String libriJson,
-            @RequestPart(value = "file" ,required= false) MultipartFile[] files) {
+            @RequestPart(value = "file", required = false) MultipartFile[] files) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
 
@@ -92,4 +91,15 @@ public class CartaceoController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Cartaceo>> findByTitolo(@RequestParam String titolo) {
+        List<Cartaceo> cartacei = cartaceoService.findByTitolo(titolo);
+        if (cartacei.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(cartacei);
+        }
+    }
 }
+

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class CartaceoService {
@@ -101,5 +102,11 @@ public class CartaceoService {
         return completeResponse;
 
     }
+
+    public List<Cartaceo> findByTitolo(String titolo) {
+        return repository.findByTitoloContainingIgnoreCase(titolo);
+    }
+
+
 
 }
