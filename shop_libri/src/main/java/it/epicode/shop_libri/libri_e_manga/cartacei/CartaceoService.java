@@ -44,8 +44,7 @@ public class CartaceoService {
 
         List<String> urls = new ArrayList<>();
 
-        for (MultipartFile file : files) {
-            var uploadResult = cloudinary.uploader().upload(file.getBytes(),
+        for (MultipartFile file : files) {var uploadResult = cloudinary.uploader().upload(file.getBytes(),
                     com.cloudinary.utils.ObjectUtils.asMap("public_id", request.getTitolo() + "_avatar_" + UUID.randomUUID().toString()));
             String url = uploadResult.get("url").toString();
             urls.add(url);
