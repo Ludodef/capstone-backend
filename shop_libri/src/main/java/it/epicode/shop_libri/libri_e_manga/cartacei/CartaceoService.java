@@ -1,11 +1,13 @@
 package it.epicode.shop_libri.libri_e_manga.cartacei;
 
 import com.cloudinary.Cloudinary;
+import it.epicode.shop_libri.libri_e_manga.security.User;
 import it.epicode.shop_libri.libri_e_manga.security.UserRespository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -107,5 +109,42 @@ public class CartaceoService {
     }
 
 
+    @Transactional
+    public ResponseEntity<CompleteResponse> addToFavorites(Long cartaceoId, Long userId) {
+        Cartaceo cartaceo = repository.findById(cartaceoId)
+                .orElseThrow(() -> new EntityNotFoundException("Cartaceo non trovato con ID: " + cartaceoId));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato con ID: " + userId));
+
+        user.getFavorites().add(cartaceo);
+        userRepository.save(user);
+
+        // Costruisci la CompleteResponse
+        CompleteResponse completeResponse = new CompleteResponse();
+        BeanUtils.copyProperties(cartaceo, completeResponse);  // Copia le proprietà del cartaceo
+        completeResponse.setUser(user); // Imposta l'utente che ha aggiunto il cartaceo ai preferiti
+        completeResponse.setIdUser(user.getId());
+
+        return ResponseEntity.ok(completeResponse);
+    }
+
+    @Transactional
+    public ResponseEntity<CompleteResponse> removeFromFavorites(Long cartaceoId, Long userId) {
+        Cartaceo cartaceo = repository.findById(cartaceoId)
+                .orElseThrow(() -> new EntityNotFoundException("Cartaceo non trovato con ID: " + cartaceoId));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato con ID: " + userId));
+
+        user.getFavorites().remove(cartaceo);
+        userRepository.save(user);
+
+        // Costruisci la CompleteResponse
+        CompleteResponse completeResponse = new CompleteResponse();
+        BeanUtils.copyProperties(cartaceo, completeResponse);  // Copia le proprietà del cartaceo
+        completeResponse.setUser(user); // Imposta l'utente che ha rimosso il cartaceo dai preferiti
+        completeResponse.setIdUser(user.getId());
+
+        return ResponseEntity.ok(completeResponse);
+    }
 
 }

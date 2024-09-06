@@ -9,7 +9,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -56,4 +58,7 @@ public class Cartaceo {
     @JsonIgnoreProperties({"cartacei", "carrello"})
     private List<RigaCarrello> righeCarrello;
 
+    @ManyToMany(mappedBy = "favorites")
+    @JsonIgnoreProperties("favorites")
+    private Set<User> usersFavoritedBy = new HashSet<>();
 }

@@ -2,11 +2,8 @@ package it.epicode.shop_libri.libri_e_manga.cartacei;
 
 import com.cloudinary.Cloudinary;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -100,6 +97,16 @@ public class CartaceoController {
         } else {
             return ResponseEntity.ok(cartacei);
         }
+    }
+
+    @PostMapping("/{id}/favorites/add")
+    public ResponseEntity<CompleteResponse> addToFavorites(@PathVariable Long id, @RequestParam Long userId) {
+        return cartaceoService.addToFavorites(id, userId);
+    }
+
+    @DeleteMapping("/{id}/favorites/remove")
+    public ResponseEntity<CompleteResponse> removeFromFavorites(@PathVariable Long id, @RequestParam Long userId) {
+        return cartaceoService.removeFromFavorites(id, userId);
     }
 }
 
